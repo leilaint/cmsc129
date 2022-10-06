@@ -10,6 +10,7 @@ transitions={}
 
 #reads every line until end starting from the 2nd line
 for line in trans[1:]:
+    alpha_count=len(alphabet)
     #splits every character separated by comma
     charac=line.split(',')
 
@@ -19,7 +20,7 @@ for line in trans[1:]:
     elif charac[0] == '-':
         start_state=charac[1]
     
-    for i in range(0, len(alphabet)):
+    for i in range(0, alpha_count):
         #if i==0 then add item in dictionary
         if i==0:
             transitions[charac[1]] = {alphabet[i]: charac[i+2]}
@@ -27,26 +28,34 @@ for line in trans[1:]:
         else:
             transitions[charac[1]].update({alphabet[i]: charac[i+2]})
 
-
 #opens the input string file
 with open(r"strings.in", 'r') as inputstrings:
     #gets the length
-    x = len(inputstrings.readlines())
+    x=len(inputstrings.readlines())
     
     #goes back to first line of the files
     line=inputstrings.seek(0)
-
+    current_state = start_state
     #will check per line
     for i in range(0, x):
-        current_state = start_state
+        err=False
         line = inputstrings.readline()
 
         for per in line:
-            if(per!='\n'):
-                current_state=transitions[current_state][per]
-    
-        #checks if the last state is the same as the final state
-        if current_state in fin_state:
-            print('VALID')
-        else:
-            print('INVALID')
+            if(per!='\n') :
+                #KANI KAY FOR CHECKING NI IF ANG NAA SA INPUT STRING KAY KATONG SA ALPHABET LANG
+                #SO DIRA SA ELSE KAY MAG DISPLAY GURU MSG IF 
+                if per in alphabet:
+                    current_state=transitions[current_state][per]
+                else:
+                    print("Line ", i+1, "containing ", line," has an error!", per,"is not one of the alphabets")
+                    err=True
+                    break
+
+        if err==False:
+            #checks if the last state is the same as the final state
+            if current_state in fin_state:
+                print(line, ' ===> VALID')
+            else:
+                print(line, ' ===> INVALID')
+            
