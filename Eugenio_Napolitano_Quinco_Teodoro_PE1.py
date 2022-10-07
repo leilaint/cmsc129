@@ -1,3 +1,4 @@
+#open the transition file
 trans=open('transitions.dfa', 'r').read().splitlines()
 
 #alphabet=[]
