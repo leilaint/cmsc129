@@ -13,20 +13,32 @@ for line in trans[1:]:
     alpha_count=len(alphabet)
     #splits every character separated by comma
     charac=line.split(',')
+    length=len(charac)
+
+    #checks if the number of alphabet is equal to
+    if(alpha_count+1)==length:
+        continue
+    else:
+        print("Error in dfa file")
+        exit()
 
     #determines the final and start state 
     if charac[0] == '+':
-        fin_state.append(charac[1])
+        fin_state.append(charac[1].upper())
     elif charac[0] == '-':
-        start_state=charac[1]
+        start_state=charac[1].upper()
+
     
     for i in range(0, alpha_count):
         #if i==0 then add item in dictionary
         if i==0:
-            transitions[charac[1]] = {alphabet[i]: charac[i+2]}
+            transitions[charac[1].upper()] = {alphabet[i]: charac[i+2].upper()}
         #else, update the item in the dictionary
         else:
-            transitions[charac[1]].update({alphabet[i]: charac[i+2]})
+            transitions[charac[1].upper()].update({alphabet[i]: charac[i+2].upper()})
+
+for transit in transitions:
+  print(transit, "=", transitions[transit])
 
 #opens the input string file
 with open(r"strings.in", 'r') as inputstrings:
