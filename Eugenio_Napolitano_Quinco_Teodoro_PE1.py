@@ -14,16 +14,19 @@ for line in trans[1:]:
     alpha_count=len(alphabet)
     #splits every character separated by comma
     charac=line.split(',')
-    length=len(charac)
+    length=len(charac)-1
+
+    print("charac:", charac)
 
     #checks if the number of alphabet is equal to
-    if(alpha_count+1)==length:
-        continue
-    else:
+    if(alpha_count+1)!=length:
+    #     continue
+    # else:
         print("Error in dfa file")
-        #exit() 
+        exit() 
         #feel ko dapat we need to function it out mga segments ani kay the code sa baba is unreachable pag naay exit na call
 
+    
     #determines the final and start state 
     if charac[0] == '+':
         fin_state.append(charac[1].upper())
