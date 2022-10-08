@@ -1,5 +1,6 @@
 from ctypes import alignment
 from tkinter import*
+from tkinter.ttk import Treeview
 
 def main():
     root = Tk()
@@ -30,9 +31,21 @@ class Window:
         Label(self.root,text="Output").grid(row=2, column=4, sticky="w")
 
         #row3, trans table, input, output
+        transition = [('-','A','B','A'),
+            (' ','B','B','C'),
+            ('+','C','B','A')]
 
-        #row4, status
+        total_rows = len(transition)
+        total_columns = len(transition[0])
+        
+        for i in range(total_rows):
+            for j in range(total_columns):
+                 Label(self.root, text=transition[i][j]).grid(row=i+3, column=j) #di nako makuha how to get rid mga spaces T_T
 
+    
+    
+
+    
 
     def load_file():
 
