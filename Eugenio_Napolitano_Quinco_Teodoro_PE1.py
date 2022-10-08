@@ -21,7 +21,8 @@ for line in trans[1:]:
         continue
     else:
         print("Error in dfa file")
-        exit()
+        #exit() 
+        #feel ko dapat we need to function it out mga segments ani kay the code sa baba is unreachable pag naay exit na call
 
     #determines the final and start state 
     if charac[0] == '+':
@@ -49,6 +50,7 @@ with open(r"strings.in", 'r') as inputstrings:
     #goes back to first line of the files
     line=inputstrings.seek(0)
     current_state = start_state
+
     #will check per line
     for i in range(0, x):
         err=False
@@ -59,7 +61,7 @@ with open(r"strings.in", 'r') as inputstrings:
                 #KANI KAY FOR CHECKING NI IF ANG NAA SA INPUT STRING KAY KATONG SA ALPHABET LANG
                 #SO DIRA SA ELSE KAY MAG DISPLAY GURU MSG IF 
                 if per in alphabet:
-                    current_state=transitions[current_state][per]
+                    current_state=transitions[current_state][per] 
                 else:
                     print("Line ", i+1, "containing ", line," has an error!", per,"is not one of the alphabets")
                     err=True
