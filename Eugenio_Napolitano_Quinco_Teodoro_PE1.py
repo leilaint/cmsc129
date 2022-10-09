@@ -9,6 +9,15 @@ fin_state=[]
 start_state=''
 transitions={}
 
+def result(current_state):
+    with open('strings.out', 'a+') as res:
+         #checks if the last state is the same as the final state
+            if current_state in fin_state:
+                res.write('Valid\n')
+            else:
+                res.write('Invalid\n')
+
+
 #reads every line until end starting from the 2nd line
 for line in trans[1:]:
     alpha_count=len(alphabet)
@@ -43,10 +52,10 @@ for line in trans[1:]:
             transitions[charac[1].upper()].update({alphabet[i]: charac[i+2].upper()})
 
 for transit in transitions:
-  print(transit, "=", transitions[transit])
+    print(transit, "=", transitions[transit])
 
 #opens the input string file
-with open(r"strings.in", 'r') as inputstrings:
+with open("strings.in", 'r') as inputstrings:
     #gets the length
     x=len(inputstrings.readlines())
     
@@ -71,9 +80,11 @@ with open(r"strings.in", 'r') as inputstrings:
                     break
 
         if err==False:
-            #checks if the last state is the same as the final state
-            if current_state in fin_state:
-                print(line, ' ===> VALID')
-            else:
-                print(line, ' ===> INVALID')
+            result(current_state)
+            # #checks if the last state is the same as the final state
+            # if current_state in fin_state:
+            #     print(line, ' ===> VALID')
+            # else:
+            #     print(line, ' ===> INVALID')
             
+
