@@ -33,31 +33,44 @@ class Window:
 
         #row3, trans table, input, output
         Label(self.root, text="State").grid(row=3, column=2, sticky="w")
-        #Label(self.root, text="0").grid(row=3, column=3, sticky="w")
-        #Label(self.root, text="1").grid(row=3, column=4, sticky="w")
 
             
 
     def load_file(self):
-        filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File", filetypes = (("dfa files","*.dfa*"), ("in files","*.in")))
+        filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File")
         tdfa = open(filename, 'r').read()
         tdfa_lines = open(filename, 'r').read().splitlines()
         print(tdfa)
 
         total_rows = len(tdfa_lines)
-        total_columns = len(tdfa)
+        temp = 4
 
-        print (total_columns)
-        print(total_rows)
+        Label(self.root, text=tdfa[0]).grid(row=3, column=3, sticky="w")
+        Label(self.root, text=tdfa[2]).grid(row=3, column=4, sticky="w")
 
         for i in range(total_rows):
-            for j in range(len(tdfa)):
-                if (tdfa[i][j]=="\n"):
-                    break
-                else:
-                    Label(self.root, text=tdfa[i][j]).grid(row=i+4, column=j+1, sticky="w") 
+            rowi = i + 4
+            columnj = 1
+            total_columns = len(tdfa_lines[i]) + 1
 
-        pass
+            for j in range(total_columns):
+
+                if (tdfa[temp]==","):
+                    temp = temp + 1
+
+                if (tdfa[temp]=="\n"):
+                    temp = temp + 1
+                    break
+
+                else:
+                    Label(self.root, text=tdfa[temp]).grid(row=rowi, column=columnj, sticky="w") 
+                    columnj += 1
+                    temp = temp + 1 
+                    print("norm")
+                
+        filenamein = filedialog.askopenfilename(initialdir = "/", title = "Select a File") 
+        fileinput = open(filenamein, 'r').read()
+        lines = len(fileinput.readlines())
         
     def process_file():
         pass
