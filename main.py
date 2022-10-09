@@ -1,3 +1,5 @@
+import GUI
+
 #open the transition file
 trans=open('transitions.dfa', 'r').read().splitlines()
 
@@ -22,7 +24,6 @@ for line in trans[1:]:
     else:
         print("Error in dfa file")
         #exit() 
-        #feel ko dapat we need to function it out mga segments ani kay the code sa baba is unreachable pag naay exit na call
 
     #determines the final and start state 
     if charac[0] == '+':
