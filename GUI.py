@@ -55,6 +55,9 @@ class Window:
 
             for j in range(total_columns):
 
+                if (tdfa[temp]=="," and tdfa[temp-1]=="\n"):
+                    columnj += 1
+
                 if (tdfa[temp]==","):
                     temp = temp + 1
 
@@ -66,7 +69,6 @@ class Window:
                     Label(self.root, text=tdfa[temp]).grid(row=rowi, column=columnj, sticky="w") 
                     columnj += 1
                     temp = temp + 1 
-                    print("norm")
                 
         filenamein = filedialog.askopenfilename(initialdir = "/", title = "Select a File") 
         fileinput = open(filenamein, 'r').read()
