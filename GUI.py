@@ -91,7 +91,7 @@ class Window:
                 tkinter.messagebox.showerror("Error","Unable to load content from transitions.dfa due to invalid content.")
         
         #processes the .in file for display
-        if filename.endswith('.in'):
+        elif filename.endswith('.in'):
             
             global input_path
             input_path = filename
