@@ -46,7 +46,7 @@ class Window:
     def load_file(self):
         
         filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File")
-
+        status = ''
         tdfa = open(filename, 'r').read()
         tdfa_lines = open(filename, 'r').read().splitlines()
         total_rows = len(tdfa_lines)
@@ -81,12 +81,13 @@ class Window:
                         if (tdfa[temp]=="\n"):
                             columnj = 1
                             temp = temp + 1
-                            break
-
+                            break                  
                         else:
                             Label(self.root, text=tdfa[temp]).grid(row=rowi, column=columnj, sticky="w")
                             columnj += 1
                             temp = temp + 1
+                status = 'Table has been successfully loaded'
+                Label(self.root, text=status).grid(row = 9, column=7, sticky=E)
             else:
                 tkinter.messagebox.showerror("Error","Unable to load content from transitions.dfa due to invalid content.")
         
@@ -104,6 +105,10 @@ class Window:
 
                 Label(self.root, text=tdfa_lines[temp]).grid(row=rowi, column=columnj, sticky="w")
                 temp = temp + 1
+            
+            status = 'Input has been successfully loaded'
+            Label(self.root, text=status).grid(row = 9, column=7, sticky=E)
+
         else:
             tkinter.messagebox.showerror("Error","INVALID FILE")
 
@@ -120,4 +125,6 @@ class Window:
             row = i+3
             Label(self.root, text=output[i]).grid(row=row, column=7, sticky="w")
 
+        status = 'Successfully processed. Output saved to strings.out.'
+        Label(self.root, text=status).grid(row = 9, column=7, sticky=E)
 main()
