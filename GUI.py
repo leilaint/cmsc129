@@ -88,7 +88,7 @@ class Window:
                             columnj += 1
                             temp = temp + 1
             else:
-                tkinter.messagebox.showerror("Error","Error in dfa file")
+                tkinter.messagebox.showerror("Error","Unable to load content from transitions.dfa due to invalid content.")
         
         #processes the .in file for display
         if filename.endswith('.in'):
@@ -104,6 +104,8 @@ class Window:
 
                 Label(self.root, text=tdfa_lines[temp]).grid(row=rowi, column=columnj, sticky="w")
                 temp = temp + 1
+        else:
+            tkinter.messagebox.showerror("Error","INVALID FILE")
 
     #function that calls the main to process the fike and produce results
     def process_file(self):
