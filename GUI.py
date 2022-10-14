@@ -41,9 +41,7 @@ class Window:
     #this function serves as the function to open the files and call for errorchecking before displaying in the window
     def load_file(self):
         #row2, labels
-        Label(self.root,text="Transition Table", pady=10).grid(row=2, column=1, columnspan=4, sticky="w")
-        Label(self.root,text="Input").grid(row=2, column=5, sticky="w")
-        Label(self.root,text="Output").grid(row=2, column=7, sticky="w")
+        
 
         filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File")
         status = ''
@@ -51,6 +49,10 @@ class Window:
         tdfa_lines = open(filename, 'r').read().splitlines()
         total_rows = len(tdfa_lines)
 
+        Label(self.root,text="Transition Table", pady=10).grid(row=2, column=1, columnspan=4, sticky="w")
+        Label(self.root,text="Input").grid(row=2, column=5, sticky="w")
+        Label(self.root,text="Output").grid(row=2, column=7, sticky="w")
+        
         #processes the dfa file for display
         if filename.endswith('.dfa'):
             Label(self.root, text="State", padx="1").grid(row=3, column=2, sticky="w")
