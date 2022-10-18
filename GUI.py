@@ -37,20 +37,22 @@ class Window:
         Label(self.root,text="     ").grid(row=1, column=6)
         button2 = Button(self.root, text="Process", justify="center", padx="50", pady="10", command=self.process_file).grid(row=1, column=7)
 
-        #row2, labels
-        Label(self.root,text="Transition Table", pady=10).grid(row=2, column=1, columnspan=4, sticky="w")
-        Label(self.root,text="Input").grid(row=2, column=5, sticky="w")
-        Label(self.root,text="Output").grid(row=2, column=7, sticky="w")
 
     #this function serves as the function to open the files and call for errorchecking before displaying in the window
     def load_file(self):
+        #row2, labels
         
-        filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File")
 
+        filename = filedialog.askopenfilename(initialdir = "/", title = "Select a File")
+        status = ''
         tdfa = open(filename, 'r').read()
         tdfa_lines = open(filename, 'r').read().splitlines()
         total_rows = len(tdfa_lines)
 
+        Label(self.root,text="Transition Table", pady=10).grid(row=2, column=1, columnspan=4, sticky="w")
+        Label(self.root,text="Input").grid(row=2, column=5, sticky="w")
+        Label(self.root,text="Output").grid(row=2, column=7, sticky="w")
+        
         #processes the dfa file for display
         if filename.endswith('.dfa'):
             Label(self.root, text="State", padx="1").grid(row=3, column=2, sticky="w")
@@ -81,17 +83,19 @@ class Window:
                         if (tdfa[temp]=="\n"):
                             columnj = 1
                             temp = temp + 1
-                            break
-
+                            break                  
                         else:
                             Label(self.root, text=tdfa[temp]).grid(row=rowi, column=columnj, sticky="w")
                             columnj += 1
                             temp = temp + 1
+
+                status = 'STATUS: Table has been successfully loaded'
+                Label(self.root, text=status).grid(row = 9, column=1, columnspan=5, sticky=W)
             else:
-                tkinter.messagebox.showerror("Error","Error in dfa file")
+                tkinter.messagebox.showerror("Error","Unable to load content from transitions.dfa due to invalid content.")
         
         #processes the .in file for display
-        if filename.endswith('.in'):
+        elif filename.endswith('.in'):
             
             global input_path
             input_path = filename
@@ -104,6 +108,12 @@ class Window:
 
                 Label(self.root, text=tdfa_lines[temp]).grid(row=rowi, column=columnj, sticky="w")
                 temp = temp + 1
+            
+            status = 'STATUS: Input has been successfully loaded'
+            Label(self.root, text=status).grid(row = 9, column=1, columnspan=5, sticky=W)
+
+        else:
+            tkinter.messagebox.showerror("Error","INVALID FILE")
 
     #function that calls the main to process the fike and produce results
     def process_file(self):
@@ -118,4 +128,6 @@ class Window:
             row = i+3
             Label(self.root, text=output[i]).grid(row=row, column=7, sticky="w")
 
+        status = 'STATUS: Successfully processed. Output saved to strings.out.'
+        Label(self.root, text=status).grid(row = 9, column=1, columnspan=7, sticky=W)
 main()
